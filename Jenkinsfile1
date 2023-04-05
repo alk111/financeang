@@ -17,8 +17,8 @@
       steps {
         withCredentials([[
           credentialsId: 'aws-ecr-creds',
-          accessKeyVariable: 'AKIAWOHMJNDAY4LN6UHP',
-          secretKeyVariable: '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'
+          accessKeyVariable: ' ',
+          secretKeyVariable: ''
         ]]) {
           sh '''
             # Log in to ECR
