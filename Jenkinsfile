@@ -3,7 +3,7 @@ pipeline {
     docker {
       image 'docker:latest'
       label 'a1'
-      args '-v root:root'
+      args '-u root:root'
       
     }
   }
