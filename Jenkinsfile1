@@ -18,10 +18,7 @@ pipeline {
       steps {
         withAWS(region:'us-east-1', credentials:'a9b61b71-dfa8-4066-839a-5aa7377c9972') {
           sh '''
-            # Install the AWS CLI
-            apk add --no-cache python3 py-pip
-            pip install awscli
-            
+     
             # Log in to ECR
             $(aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/m2o2j6d0)
 
