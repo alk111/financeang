@@ -16,7 +16,7 @@
     stage('Push to ECR') {
       steps {
         withCredentials([[
-          credentialsId: 'aws-ecr-creds',
+          credentialsId: 'a9b61b71-dfa8-4066-839a-5aa7377c9972',
           accessKeyVariable: 'AWS_ACCESS_KEY_ID',
           secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
         ]]) {
