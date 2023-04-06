@@ -22,7 +22,7 @@
         ]]) {
           sh '''
             # Log in to ECR
-            $(aws ecr get-login --no-include-email)
+            $(aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/m2o2j6d0)
 
             # Tag the Docker image with the ECR repository URI
             docker tag my-image public.ecr.aws/m2o2j6d0/jenkinsimg/my-image
