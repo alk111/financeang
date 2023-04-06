@@ -1,4 +1,4 @@
-pipeline {  
+pipeline {
   agent {
     docker {
       image 'docker:latest'
@@ -6,7 +6,6 @@ pipeline {
       args '-u root:root -v /var/run/docker.sock:/var/run/docker.sock'
     }
   }
-  
   
   stages {
     stage('Build Docker Image') {
@@ -17,11 +16,7 @@ pipeline {
     
     stage('Push to ECR') {
       steps {
-        withCredentials([[
-          credentialsId: 'a9b61b71-dfa8-4066-839a-5aa7377c9972',
-          accessKeyVariable: 'AWS_ACCESS_KEY_ID',
-          secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
-        ]]) {
+        withAWS(region:'us-east-1', credentials:'a9b61b71-dfa8-4066-839a-5aa7377c9972') {
           sh '''
             # Log in to ECR
             $(aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/m2o2j6d0)
