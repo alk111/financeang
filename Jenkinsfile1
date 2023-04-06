@@ -16,7 +16,7 @@ pipeline {
     
     stage('Push to ECR') {
       steps {
-        withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: "awscredit", secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+        withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: "a9b61b71-dfa8-4066-839a-5aa7377c9972", secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
           sh '''
             apk add --no-cache python3 py-pip
             pip install awscli
