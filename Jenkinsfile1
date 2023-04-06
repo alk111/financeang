@@ -14,7 +14,13 @@ pipeline {
       steps {
         withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: "a9b61b71-dfa8-4066-839a-5aa7377c9972", secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
           sh '''
-     
+            
+            # Configure AWS CLI with credentials
+            
+            aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
+            aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
+            aws configure set region us-east-1
+            
             # Log in to ECR
             aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/m2o2j6d0
 
