@@ -22,7 +22,7 @@ pipeline {
             aws configure set region us-east-1
             
             # Add IAM policy for ecruser
-            aws iam attach-user-policy --user-name ecruser --policy-arn arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryPowerUser
+            aws iam attach-user-policy --user-name newecr --policy-arn arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryPowerUser
             
             # Get ECR authorization token
             AWS_TOKEN=`aws ecr-public get-authorization-token --region us-east-1 --output text --query 'authorizationData[].authorizationToken' | base64 -d | cut -d: -f2`
