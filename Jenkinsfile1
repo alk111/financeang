@@ -21,9 +21,14 @@ pipeline {
             aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
             aws configure set region us-east-1
             
-            # Log in to ECR
-            $(aws ecr-public get-login-password --region us-east-1) | docker login --username AWS --password-stdin public.ecr.aws/m2o2j6d0
+            # Add IAM policy for ecruser
+            aws iam attach-user-policy --user-name ecruser --policy-arn arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryPowerUser
             
+            # Get ECR authorization token
+            AWS_TOKEN=`aws ecr-public get-authorization-token --region us-east-1 --output text --query 'authorizationData[].authorizationToken' | base64 -d | cut -d: -f2`
+            
+            # Log in to ECR
+            echo $AWS_TOKEN | docker login --username AWS --password-stdin public.ecr.aws/m2o2j6d0
 
             # Tag the Docker image with the ECR repository URI
             docker tag my-image public.ecr.aws/m2o2j6d0/jenkinsimg/my-image
