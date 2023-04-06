@@ -24,10 +24,10 @@ pipeline {
             aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/m2o2j6d0
             
             # Tag the Docker image with the ECR repository URI
-            docker tag my-image public.ecr.aws/m2o2j6d0/jenkinsimg/my-image
+            docker tag jenkinsimg:latest public.ecr.aws/m2o2j6d0/jenkinsimg:latest
 
             # Push the Docker image to ECR
-            docker push public.ecr.aws/m2o2j6d0/jenkinsimg/my-image
+            docker push public.ecr.aws/m2o2j6d0/jenkinsimg:latest
           '''
         }
       }
